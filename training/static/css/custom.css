@@ -1,0 +1,19 @@
+.login-page {
+    padding-top: 10% !important;
+    margin-left: -250px !important;
+}
+
+@media (max-width: 991px) {
+    .login-page {
+        margin-left: 0px !important;
+    }
+
+    .logo-bajo-agua {
+        margin-left: 0px !important;
+    }
+}
+
+.logo-bajo-agua {
+    margin-left: 24px;
+    margin-bottom: 6px;
+}

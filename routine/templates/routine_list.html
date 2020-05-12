@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="page-inner">
+        <div class="page-header">
+            <h4 class="page-title">Rutinas</h4>
+            <ul class="breadcrumbs">
+                <li class="nav-home">
+                    <a href="{% url 'dashboard' %}">
+                        <i class="flaticon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'routines_list' %}">Rutinas</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-head-bg-info mt-4">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Rutina</th>
+                                    <th scope="col">Descripción</th>
+                                    <th class="text-center" scope="col">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for routine in routines %}
+                                <tr>
+                                    <td>{{routine.name}}</td>
+                                    <td>{{routine.description}}</td>
+                                    <td class="text-center"><a href="{% url 'routine_detail' routine.id %}" class="btn btn-success">Ver</a></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
