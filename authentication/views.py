@@ -15,7 +15,7 @@ def login_view(request):
             return render(request, 'login.html', {'form': AuthenticationForm()})
 
     if request.user.is_authenticated:
-        return render(request, 'index.html')
+        return redirect('/dashboard')
 
     return render(request, 'login.html', {'form': AuthenticationForm()})
 
