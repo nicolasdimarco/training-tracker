@@ -26,32 +26,35 @@
             </ul>
         </div>
         <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <table class="table table-head-bg-info mt-4">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Rutina</th>
-                                    <th scope="col">Fecha</th>
-                                    <th scope="col">Duración</th>
-                                    <th scope="col" class="text-center">Acción</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for training  in trainings %}
-                                    <tr>
-                                        <td>{{training.routine.name}}</td>
-                                        <td>{{training.date}}</td>
-                                        <td>{{training.duration}}</td>
-                                        <td class="text-center"><a href="{% url 'training_delete' training.id %}" class="btn btn-danger">Borrar</a></td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                <form method="post" action="{% url 'training_create' %}" class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                {% csrf_token %}
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        {{ form.routine.label_tag }}
+                                        {{ form.routine }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form.date.label_tag }}
+                                        {{ form.date }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form.duration.label_tag }}
+                                        {{ form.duration }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-action float-right">
+                            <div class="float-right">
+                                <a href="{% url 'training_list' %}" class="btn btn-danger">Cancelar</a>
+                                <button type="submit" class="btn btn-success">Crear</button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </form>
         </div>
     </div>
 
