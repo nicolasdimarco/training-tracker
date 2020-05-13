@@ -1,0 +1,13 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+.vscode/
+.idea/
+
+db.sqlite3
+node_modules
+
+frontend/dist
+frontend/package-lock.json
