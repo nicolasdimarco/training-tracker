@@ -23,6 +23,15 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
+                        {% if user.is_trainer %}
+                            <div class="row">
+                                <div class="col-md-12 float-right">
+                                    <a href="{% url 'routine_create' %}" class="btn btn-success float-right">
+                                        <i class="fas fa-clipboard-list"></i> Nueva rutina
+                                    </a>
+                                </div>
+                            </div>
+                        {% endif %}
                         <table class="table table-head-bg-info mt-4">
                             <thead>
                                 <tr>
@@ -36,7 +45,13 @@
                                 <tr>
                                     <td>{{routine.name}}</td>
                                     <td>{{routine.description}}</td>
-                                    <td class="text-center"><a href="{% url 'routine_detail' routine.id %}" class="btn btn-success">Ver</a></td>
+                                    <td class="text-center">
+                                        <a href="{% url 'routine_detail' routine.id %}" class="btn btn-info">Ver</a>
+                                        {% if user.is_trainer %}
+                                            <a href="{% url 'routine_edit' routine.id %}" class="btn btn-primary">Editar</a>
+                                            <a href="{% url 'routine_instruction_list' routine.id %}" class="btn btn-secondary">Ejercicios</a>
+                                        {% endif %}
+                                    </td>
                                 </tr>
                                 {% endfor %}
                             </tbody>

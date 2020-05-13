@@ -4,7 +4,7 @@
 
     <div class="page-inner">
         <div class="page-header">
-            <h4 class="page-title">Entrenamientos</h4>
+            <h4 class="page-title">Rutinas</h4>
             <ul class="breadcrumbs">
                 <li class="nav-home">
                     <a href="{% url 'dashboard' %}">
@@ -15,42 +15,38 @@
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="{% url 'training_list' %}">Entrenamientos</a>
+                    <a href="{% url 'routines_list' %}">Rutinas</a>
                 </li>
                 <li class="separator">
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="{% url 'training_create' %}">Crear</a>
+                    <a href="{% url 'routine_edit' routine.id %}">Editar</a>
                 </li>
             </ul>
         </div>
         <div class="row">
-            <form method="post" action="{% url 'training_create' %}" class="col-md-12">
+            <form method="post" action="{% url 'routine_edit' routine.id %}" class="col-md-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
                             {% csrf_token %}
                             <div class="col-md-12 col-lg-12">
                                 <div class="form-group">
-                                    {{ form.routine.label_tag }}
-                                    {{ form.routine }}
+                                    {{ form.name.label_tag }}
+                                    {{ form.name }}
                                 </div>
                                 <div class="form-group">
-                                    {{ form.date.label_tag }}
-                                    {{ form.date }}
-                                </div>
-                                <div class="form-group">
-                                    {{ form.duration.label_tag }}
-                                    {{ form.duration }}
+                                    {{ form.description.label_tag }}
+                                    {{ form.description }}
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="card-action float-right">
                         <div class="float-right">
-                            <a href="{% url 'training_list' %}" class="btn btn-danger">Cancelar</a>
-                            <button type="submit" class="btn btn-success">Crear</button>
+                            <a href="{% url 'routines_list' %}" class="btn btn-danger">Cancelar</a>
+                            <button type="submit" class="btn btn-success">Editar</button>
                         </div>
                     </div>
                 </div>

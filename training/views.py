@@ -72,12 +72,12 @@ def training_create(request):
 
 
 @login_required
-def training_delete(request, id):
+def training_delete(request, pk):
     try:
-        training = Training.objects.get(pk=id)
+        training = Training.objects.get(pk=pk)
         training.delete()
         return redirect("/training")
-    except Training.ObjectDoesNotExist:
+    except Training.DoesNotExist:
         trainings = Training.objects.filter(user=request.user)
         ctx = {'trainings': trainings, 'error': 'El entrenamiento que intenta borrar no existe'}
         return render(request, 'training_list.html', ctx)
