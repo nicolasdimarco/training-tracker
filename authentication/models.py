@@ -4,3 +4,4 @@ from django.db import models
 
 class User(AbstractUser):
     email = models.EmailField('email', unique=True)
+    is_trainer = models.BooleanField('is trainer', default=False)
