@@ -1,9 +1,12 @@
 import datetime
 from django.contrib.auth.decorators import login_required
+from django.db.models import Sum
 from django.shortcuts import render, redirect
 from django.forms import ModelForm
 from django import forms
-from routine.models import Routine
+
+from authentication.models import User
+from routine.models import Routine, RoutineInstruction
 from training.models import Training
 
 
@@ -31,6 +34,29 @@ def dashboard(request):
 def training_list(request):
     trainings = Training.objects.filter(user=request.user).order_by('-date', 'duration')
     return render(request, 'training_list.html', {'trainings': trainings})
+
+
+@login_required
+def trainer_dashboard(request):
+    if request.user.is_trainer:
+        trainings = Training.objects.all().order_by('user', '-date', 'duration')
+        members = User.objects.all().count()
+        instructions = RoutineInstruction.objects.all().count()
+        hours = trainings.aggregate(Sum('duration'))
+        if hours:
+            hours = hours['duration__sum']
+        else:
+            hours = 0
+        routines = Routine.objects.all().count()
+        ctx = {
+            'trainings': trainings,
+            'members': members,
+            'routines': routines,
+            'instructions': instructions,
+            'hours': hours
+        }
+        return render(request, 'trainer_dashboard.html', ctx)
+    return redirect("/training")
 
 
 @login_required

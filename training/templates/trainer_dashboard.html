@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="page-inner">
+        <div class="page-header">
+            <h4 class="page-title">Estadísticas entrenador</h4>
+            <ul class="breadcrumbs">
+                <li class="nav-home">
+                    <a href="{% url 'dashboard' %}">
+                        <i class="flaticon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'trainer_dashboard' %}">Entrenador</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-primary card-round">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="icon-big text-center">
+                                    <i class="flaticon-users"></i>
+                                </div>
+                            </div>
+                            <div class="col-7 col-stats">
+                                <div class="numbers">
+                                    <p class="card-category">Personas</p>
+                                    <h4 class="card-title">{{members}}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-info card-round">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="icon-big text-center">
+                                    <i class="flaticon-list"></i>
+                                </div>
+                            </div>
+                            <div class="col-7 col-stats">
+                                <div class="numbers">
+                                    <p class="card-category">Rutinas</p>
+                                    <h4 class="card-title">{{routines}}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-success card-round">
+                    <div class="card-body ">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="icon-big text-center">
+                                    <i class="flaticon-stopwatch"></i>
+                                </div>
+                            </div>
+                            <div class="col-7 col-stats">
+                                <div class="numbers">
+                                    <p class="card-category">Tiempo</p>
+                                    <h4 class="card-title">{{hours}}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-secondary card-round">
+                    <div class="card-body ">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="icon-big text-center">
+                                    <i class="flaticon-success"></i>
+                                </div>
+                            </div>
+                            <div class="col-7 col-stats">
+                                <div class="numbers">
+                                    <p class="card-category">Ejercicios</p>
+                                    <h4 class="card-title">{{instructions}}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-head-bg-info mt-4">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Persona</th>
+                                    <th scope="col">Rutina</th>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Duración</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for training  in trainings %}
+                                    <tr>
+                                        <td>{{training.user.username}}</td>
+                                        <td>{{training.routine.name}}</td>
+                                        <td>{{training.date}}</td>
+                                        <td>{{training.duration}}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

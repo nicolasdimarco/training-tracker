@@ -77,6 +77,14 @@
 									<p>Mi entrenamiento</p>
 								</a>
 							</li>
+							{% if user.is_trainer%}
+								<li class="nav-item">
+									<a href="{% url 'trainer_dashboard' %}" aria-expanded="false">
+										<i class="fas fa-bullhorn"></i>
+										<p>Entrenador</p>
+									</a>
+								</li>
+							{% endif %}
 							<li class="nav-item">
 								<a href="{% url 'logout' %}" aria-expanded="false">
 									<i class="fas fa-power-off"></i>
