@@ -16,6 +16,9 @@ Using this application you will be able to:
 - Track the training of your students.
 
 
+## Preview
+![alt text](training/static/img/demo.gif "Logo Title Text 1")
+
 ## Setting up
 
 ### Pre-requisites
@@ -30,7 +33,6 @@ Using this application you will be able to:
 
     $ pipenv run python manage.py migrate
     $ pipenv run python manage.py createsuperuser
-    
 
 
 ## Using
