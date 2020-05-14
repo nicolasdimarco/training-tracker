@@ -58,3 +58,15 @@ def routine_edit(request, pk):
         return render(request, 'routine_edit.html', {'form': RoutineForm(instance=routine), 'routine': routine})
     except Routine.DoesNotExist:
         return redirect("/routine")
+
+
+@login_required
+def routine_instruction_list(request, pk):
+    if not request.user.is_trainer:
+        return redirect("/routine")
+    try:
+        routine = Routine.objects.get(pk=pk)
+        instructions = RoutineInstruction.objects.filter(routine=routine)
+        return render(request, 'routine_instruction_list.html', {'instructions': instructions, 'routine': routine})
+    except Routine.DoesNotExist:
+        return redirect("/routine")
