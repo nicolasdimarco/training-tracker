@@ -4,7 +4,7 @@
 
     <div class="page-inner">
         <div class="page-header">
-            <h4 class="page-title">Ejercicios</h4>
+            <h4 class="page-title">Ejercicios rutina {{routine.name}}</h4>
             <ul class="breadcrumbs">
                 <li class="nav-home">
                     <a href="{% url 'dashboard' %}">
@@ -15,7 +15,7 @@
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="{% url 'routines_list' %}">Rutinas</a>
+                    <a href="{% url 'routine_list' %}">Rutinas</a>
                 </li>
                 <li class="separator">
                     <i class="flaticon-right-arrow"></i>
@@ -32,7 +32,7 @@
                         {% if user.is_trainer %}
                             <div class="row">
                                 <div class="col-md-12 float-right">
-                                    <a href="{% url 'routine_create' %}" class="btn btn-success float-right">
+                                    <a href="{% url 'routine_instruction_create' routine.id %}" class="btn btn-success float-right">
                                         <i class="fas fa-clipboard-list"></i> Nuevo ejercicio
                                     </a>
                                 </div>
@@ -42,7 +42,8 @@
                             <thead>
                                 <tr class="col-md-12">
                                     <th scope="col" class="col-md-3">Titulo</th>
-                                    <th scope="col" class="col-md-6">Descripción</th>
+                                    <th scope="col" class="col-md-4">Descripción</th>
+                                    <th scope="col" class="col-md-2 text-center">Video</th>
                                     <th class="text-center col-md-3" scope="col">Acción</th>
                                 </tr>
                             </thead>
@@ -52,10 +53,15 @@
                                     <td>{{instruction.title}}</td>
                                     <td>{{instruction.description}}</td>
                                     <td class="text-center">
-                                        <a href="{% url 'routine_detail' instruction.id %}" class="btn btn-info">Ver</a>
-                                        {% if user.is_trainer %}
-                                            <a href="{% url 'routine_edit' instruction.id %}" class="btn btn-primary">Editar</a>
-                                        {% endif %}
+                                        {%if instruction.video_link%}
+                                            <a href='{{instruction.video_link}}' target="_blank" class="yt-link">
+                                                <i class="flaticon-play-button-1"></i>
+                                            </a>
+                                        {%else%}
+                                            Sin video
+                                        {%endif%}</td>
+                                    <td class="text-center">
+                                        <a href="{% url 'routine_instruction_edit' routine.id instruction.id %}" class="btn btn-primary">Editar</a>
                                     </td>
                                 </tr>
                                 {% endfor %}

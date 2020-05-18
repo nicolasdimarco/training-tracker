@@ -15,7 +15,7 @@
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="{% url 'routines_list' %}">Rutinas</a>
+                    <a href="{% url 'routine_list' %}">Rutinas</a>
                 </li>
                  <li class="separator">
                     <i class="flaticon-right-arrow"></i>
@@ -54,7 +54,7 @@
                                     <div class="tab-content" id="v-pills-with-icon-tabContent-{{instruction.id}}">
                                         {% if instruction.video_link %}
                                             <div class="tab-pane fade active show" id="v-pills-video-icons-{{instruction.id}}" role="tabpanel" aria-labelledby="v-pills-video-tab-icons-{{instruction.id}}">
-                                                <iframe width="560" height="315" src="{{instruction.video_link}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                <iframe width="560" height="315" src="https://www.youtube.com/embed/{{instruction.get_yt_video_id}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                             </div>
                                         {% endif %}
                                         {% if instruction.description %}

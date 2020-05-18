@@ -15,7 +15,7 @@
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="{% url 'routines_list' %}">Rutinas</a>
+                    <a href="{% url 'routine_list' %}">Rutinas</a>
                 </li>
             </ul>
         </div>
@@ -49,7 +49,7 @@
                                         <a href="{% url 'routine_detail' routine.id %}" class="btn btn-info">Ver</a>
                                         {% if user.is_trainer %}
                                             <a href="{% url 'routine_edit' routine.id %}" class="btn btn-primary">Editar</a>
-                                            <a href="{% url 'routine_instruction_list' routine.id %}" class="btn btn-secondary">Ejercicios</a>
+                                            <a href="{% url 'routine_instruction_list' routine.id %}" class="btn btn-secondary">Administrar Ejercicios</a>
                                         {% endif %}
                                     </td>
                                 </tr>
