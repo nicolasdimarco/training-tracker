@@ -12,7 +12,7 @@
                         <div class="card-header" style="background-color: #1572e8;">
                             <div class="card-title text-center">
                                 <a href="{% url 'login' %}" class="logo">
-					                <img src="{% static 'img/bajo-agua.png'%}" alt="navbar brand" class="navbar-brand" style="height:110px;">
+					                <img src="{% static 'img/tt-logo.png'%}" alt="navbar brand" class="navbar-brand" style="height:110px; margin-right:0px;">
 				                </a>
                             </div>
                         </div>
@@ -20,11 +20,11 @@
                             <div class="row">
                                 {% csrf_token %}
                                 <div class="col-md-12 col-lg-12">
-                                    <div class="form-group">
+                                    <div class="form-group text-center">
                                         {{ form.username.label_tag }}
                                         {{ form.username }}
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group text-center">
                                         {{ form.password.label_tag }}
                                         {{ form.password }}
                                     </div>
