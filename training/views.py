@@ -33,7 +33,13 @@ def dashboard(request):
 @login_required
 def training_list(request):
     trainings = Training.objects.filter(user=request.user).order_by('-date', 'duration')
-    return render(request, 'training_list.html', {'trainings': trainings})
+    hours = trainings.aggregate(Sum('duration'))
+    if hours:
+        hours = hours['duration__sum']
+    else:
+        hours = 0
+    qty = trainings.count()
+    return render(request, 'training_list.html', {'trainings': trainings, 'total_time': hours, 'weekly_average': qty})
 
 
 @login_required
