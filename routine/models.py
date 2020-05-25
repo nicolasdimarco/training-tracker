@@ -1,9 +1,11 @@
 from urllib.parse import urlparse, parse_qs
-
 from django.db import models
+from authentication.models import TrainingGroup
 
 
 class Routine(models.Model):
+    training_group = models.ForeignKey(TrainingGroup, on_delete=models.CASCADE, null=False, blank=False,
+                                       verbose_name='training group')
     name = models.CharField('name', max_length=128, null=False, blank=False)
     description = models.TextField('description', blank=True, null=True)
 
