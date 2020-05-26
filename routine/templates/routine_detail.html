@@ -25,6 +25,20 @@
                 </li>
             </ul>
         </div>
+        {%if routine.description%}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Descripción de la rutina</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>{{routine.description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {%endif%}
         <div class="row">
             <div class="col-md-12">
                 {% for instruction in routine_instructions %}

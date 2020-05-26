@@ -34,17 +34,15 @@
                         {% endif %}
                         <table class="table table-head-bg-info mt-4">
                             <thead>
-                                <tr>
-                                    <th scope="col">Rutina</th>
-                                    <th scope="col">Descripción</th>
-                                    <th class="text-center" scope="col">Acción</th>
+                                <tr class="col-md-12">
+                                    <th scope="col" class="col-md-6 text-center">Rutina</th>
+                                    <th class="col-md-6 text-center" scope="col">Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for routine in routines %}
                                 <tr>
                                     <td>{{routine.name}}</td>
-                                    <td>{{routine.description}}</td>
                                     <td class="text-center">
                                         <a href="{% url 'routine_detail' routine.id %}" class="btn btn-info">Ver</a>
                                         {% if user.is_trainer %}
