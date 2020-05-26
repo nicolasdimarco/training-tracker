@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='routine',
             name='training_group',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='authentication.TrainingGroup', verbose_name='training group'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='authentication.TrainingGroup', verbose_name='training group'),
             preserve_default=False,
         ),
     ]
