@@ -4,7 +4,7 @@ from authentication.models import TrainingGroup
 
 
 class Routine(models.Model):
-    training_group = models.ForeignKey(TrainingGroup, on_delete=models.CASCADE, null=False, blank=False,
+    training_group = models.ForeignKey(TrainingGroup, on_delete=models.CASCADE, blank=True, null=True,
                                        verbose_name='training group')
     name = models.CharField('name', max_length=128, null=False, blank=False)
     description = models.TextField('description', blank=True, null=True)
