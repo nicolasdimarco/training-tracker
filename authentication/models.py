@@ -14,7 +14,7 @@ class TrainingGroup(models.Model):
 
 
 class User(AbstractUser):
-    training_group = models.ForeignKey(TrainingGroup, on_delete=models.CASCADE, null=False, blank=False,
+    training_group = models.ForeignKey(TrainingGroup, on_delete=models.CASCADE, null=True, blank=True,
                                        verbose_name='training group')
     email = models.EmailField('email', unique=True)
     is_trainer = models.BooleanField('is trainer', default=False)
