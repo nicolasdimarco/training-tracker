@@ -44,10 +44,10 @@
                                 <tr>
                                     <td>{{routine.name}}</td>
                                     <td class="text-center">
-                                        <a href="{% url 'routine_detail' routine.id %}" class="btn btn-info">Ver</a>
+                                        <a href="{% url 'routine_detail' routine.id %}" class="btn btn-info btn-custom">Ver</a>
                                         {% if user.is_trainer %}
-                                            <a href="{% url 'routine_edit' routine.id %}" class="btn btn-primary">Editar</a>
-                                            <a href="{% url 'routine_instruction_list' routine.id %}" class="btn btn-secondary">Ejercicios</a>
+                                            <a href="{% url 'routine_edit' routine.id %}" class="btn btn-primary btn-custom">Editar</a>
+                                            <a href="{% url 'routine_instruction_list' routine.id %}" class="btn btn-secondary btn-custom">Ejercicios</a>
                                         {% endif %}
                                     </td>
                                 </tr>

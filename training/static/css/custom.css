@@ -11,6 +11,10 @@
     .logo-custom {
         margin-left: 0px !important;
     }
+
+    .btn-custom {
+        margin: 2px;
+    }
 }
 
 .logo-custom {
