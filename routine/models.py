@@ -21,7 +21,7 @@ class Routine(models.Model):
 
 
 class RoutineInstruction(models.Model):
-    routine = models.ForeignKey(Routine, on_delete=models.CASCADE, null=False, blank=False, verbose_name='routine')
+    routine = models.ForeignKey(Routine, on_delete=models.CASCADE, null=True, blank=True, verbose_name='routine')
     title = models.CharField('name', max_length=128, null=False, blank=False)
     description = models.TextField('description', blank=True, null=True)
     video_link = models.CharField('link', max_length=128, null=True, blank=True)
