@@ -42,15 +42,15 @@ def training_list(request):
 @login_required
 def trainer_dashboard(request):
     if request.user.is_trainer:
-        trainings = Training.objects.all().order_by('user', '-date', 'duration')
-        members = User.objects.all().count()
-        instructions = RoutineInstruction.objects.all().count()
+        trainings = Training.objects.filter(training_group=request.user.training_group).order_by('user', '-date', 'duration')
+        members = User.objects.filter(training_group=request.user.training_group).count()
+        instructions = RoutineInstruction.objects.filter(routine__training_group=request.user.training_group).count()
         hours = trainings.aggregate(Sum('duration'))
         if hours:
             hours = hours['duration__sum']
         else:
             hours = 0
-        routines = Routine.objects.all().count()
+        routines = Routine.objects.filter(training_group=request.user.training_group).count()
         ctx = {
             'trainings': trainings,
             'members': members,
