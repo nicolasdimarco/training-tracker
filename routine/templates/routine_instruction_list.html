@@ -44,7 +44,8 @@
                                     <th scope="col" class="col-md-3">Titulo</th>
                                     <th scope="col" class="col-md-4">Descripción</th>
                                     <th scope="col" class="col-md-2 text-center">Video</th>
-                                    <th class="text-center col-md-3" scope="col">Acción</th>
+                                    <th scope="col" class="col-md-1 text-center">Orden</th>
+                                    <th class="text-center col-md-2" scope="col">Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -59,7 +60,15 @@
                                             </a>
                                         {%else%}
                                             Sin video
-                                        {%endif%}</td>
+                                        {%endif%}
+                                    </td>
+                                    <td class="text-center">
+                                        {%if instruction.order%}
+                                            {{instruction.order}}
+                                        {%else%}
+                                            Sin orden
+                                        {%endif%}
+                                    </td>
                                     <td class="text-center">
                                         <a href="{% url 'routine_instruction_edit' routine.id instruction.id %}" class="btn btn-primary">Editar</a>
                                     </td>

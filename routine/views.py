@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import F
 from django.forms import ModelForm
 from django.shortcuts import render, redirect
 from django.views.decorators.clickjacking import xframe_options_exempt
@@ -27,17 +28,18 @@ class RoutineInstructionForm(ModelForm):
         self.fields['description'].label = "Descripcion"
         self.fields['video_link'].label = "Link al video"
         self.fields['video_link'].widget.attrs['placeholder'] = "Ingrese solo videos de Youtube"
+        self.fields['order'].label = "Orden"
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
 
     class Meta:
         model = RoutineInstruction
-        fields = ['title', 'description', 'video_link']
+        fields = ['title', 'description', 'video_link', 'order']
 
 
 @login_required
 def routine_list(request):
-    routines = Routine.objects.all()
+    routines = Routine.objects.filter(training_group=request.user.training_group)
     return render(request, 'routine_list.html', {'routines': routines})
 
 
@@ -45,7 +47,7 @@ def routine_list(request):
 @xframe_options_exempt
 def routine_detail(request, pk):
     routine = Routine.objects.get(pk=pk)
-    routine_instructions = RoutineInstruction.objects.filter(routine=routine)
+    routine_instructions = RoutineInstruction.objects.filter(routine=routine).order_by(F('order').asc(nulls_last=True), 'pk')
     ctx = {'routine': routine, 'routine_instructions': routine_instructions}
     return render(request, 'routine_detail.html', ctx)
 
@@ -57,6 +59,7 @@ def routine_create(request):
         if form.is_valid():
             routine = form.save(commit=False)
             routine.user = request.user
+            routine.training_group = request.user.training_group
             routine.save()
             return redirect("/routine")
     return render(request, 'routine_create.html', {'form': RoutineForm()})
@@ -82,7 +85,7 @@ def routine_instruction_list(request, pk):
         return redirect("/routine")
     try:
         routine = Routine.objects.get(pk=pk)
-        instructions = RoutineInstruction.objects.filter(routine=routine)
+        instructions = RoutineInstruction.objects.filter(routine=routine).order_by(F('order').asc(nulls_last=True), 'pk')
         return render(request, 'routine_instruction_list.html', {'instructions': instructions, 'routine': routine})
     except Routine.DoesNotExist:
         return redirect("/routine")

@@ -4,7 +4,7 @@
 
     <div class="page-inner">
         <div class="page-header">
-            <h4 class="page-title">Crear ejercicio rutina {{routine.name}}</h4>
+            <h4 class="page-title">Crear ejercicio para {{routine.name}}</h4>
             <ul class="breadcrumbs">
                 <li class="nav-home">
                     <a href="{% url 'dashboard' %}">
@@ -49,6 +49,10 @@
                                 <div class="form-group">
                                     {{ form.video_link.label_tag }}
                                     {{ form.video_link }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.order.label_tag }}
+                                    {{ form.order }}
                                 </div>
                             </div>
                         </div>

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from authentication.models import User
+from authentication.models import User, TrainingGroup
 
 
 class CustomUserAdmin(UserAdmin):
@@ -10,6 +10,7 @@ class CustomUserAdmin(UserAdmin):
             'Custom Field Heading',
             {
                 'fields': (
+                    'training_group',
                     'is_trainer',
                 ),
             },
@@ -18,3 +19,4 @@ class CustomUserAdmin(UserAdmin):
 
 
 admin.site.register(User, CustomUserAdmin)
+admin.site.register(TrainingGroup)

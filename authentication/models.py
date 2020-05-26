@@ -7,7 +7,7 @@ class TrainingGroup(models.Model):
     description = models.TextField('description', blank=True, null=True)
 
     class Meta:
-        verbose_name = 'routine'
+        verbose_name = 'training group'
 
     def __str__(self):
         return '{}'.format(self.name)
