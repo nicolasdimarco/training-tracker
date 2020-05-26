@@ -25,6 +25,7 @@ class RoutineInstruction(models.Model):
     title = models.CharField('name', max_length=128, null=False, blank=False)
     description = models.TextField('description', blank=True, null=True)
     video_link = models.CharField('link', max_length=128, null=True, blank=True)
+    order = models.IntegerField('order', null=True, blank=True)
 
     class Meta:
         verbose_name = 'routine instruction'
