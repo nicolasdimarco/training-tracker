@@ -4,20 +4,28 @@ from django.forms import ModelForm
 from django.shortcuts import render, redirect
 from django.views.decorators.clickjacking import xframe_options_exempt
 from routine.models import Routine, RoutineInstruction
+from django import forms
 
 
 class RoutineForm(ModelForm):
+    estimated_duration = forms.DurationField(label='Duración estimada', initial="00:00:00",
+                                             help_text='Dejar en "00:00:00" si no quiere especificar duración.')
 
     def __init__(self, *args, **kwargs):
         super(RoutineForm, self).__init__(*args, **kwargs)
         self.fields['name'].label = "Nombre"
         self.fields['description'].label = "Descripción"
+        self.fields['effort_level'].label = "Nivel de esfuerzo"
+        self.fields['order'].label = "Órden"
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
 
     class Meta:
         model = Routine
-        fields = ['name', 'description']
+        fields = ['name', 'description', 'estimated_duration', 'effort_level', 'order']
+        help_texts = {
+            'order': 'Dejar vacío si no importa su orden',
+        }
 
 
 class RoutineInstructionForm(ModelForm):
@@ -39,7 +47,7 @@ class RoutineInstructionForm(ModelForm):
 
 @login_required
 def routine_list(request):
-    routines = Routine.objects.filter(training_group=request.user.training_group)
+    routines = Routine.objects.filter(training_group=request.user.training_group).order_by(F('order').asc(nulls_last=True), 'pk')
     return render(request, 'routine_list.html', {'routines': routines})
 
 

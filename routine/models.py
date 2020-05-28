@@ -3,11 +3,21 @@ from django.db import models
 from authentication.models import TrainingGroup
 
 
+class EffortLevel(models.TextChoices):
+    LOW = 'LW', 'Bajo'
+    MEDIUM = 'MD', 'Medio'
+    HIGH = 'HI', 'Alto'
+
+
 class Routine(models.Model):
     training_group = models.ForeignKey(TrainingGroup, on_delete=models.CASCADE, blank=True, null=True,
                                        verbose_name='training group')
     name = models.CharField('name', max_length=128, null=False, blank=False)
     description = models.TextField('description', blank=True, null=True)
+    estimated_duration = models.DurationField('estimated duration', null=True, blank=True)
+    effort_level = models.CharField(blank=True, null=True, max_length=2, choices=EffortLevel.choices,
+                                    default=EffortLevel.LOW)
+    order = models.IntegerField('order', null=True, blank=True)
 
     class Meta:
         verbose_name = 'routine'
@@ -18,6 +28,10 @@ class Routine(models.Model):
     @property
     def instructions_qty(self):
         return RoutineInstruction.objects.filter(routine=self).count()
+
+    @property
+    def effort_level_desc(self):
+        return EffortLevel(self.effort_level).label
 
 
 class RoutineInstruction(models.Model):

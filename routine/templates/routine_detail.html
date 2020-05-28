@@ -40,6 +40,40 @@
             </div>
         {%endif%}
         <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Duración estimada</h4>
+                    </div>
+                    <div class="card-body">
+                        <h3>
+                            {%if routine.estimated_duration%}
+                                {{routine.estimated_duration}}
+                            {%else%}
+                                No especificado
+                            {%endif%}
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Nivel de esfuerzo</h4>
+                    </div>
+                    <div class="card-body">
+                        <h3>
+                            {%if routine.effort_level%}
+                                {{routine.effort_level_desc}}
+                            {%else%}
+                                No especificado
+                            {%endif%}
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-12">
                 {% for instruction in routine_instructions %}
                     <div class="card">

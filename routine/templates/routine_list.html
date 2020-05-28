@@ -35,14 +35,30 @@
                         <table class="table table-head-bg-info mt-4">
                             <thead>
                                 <tr class="col-md-12">
-                                    <th scope="col" class="col-md-6 text-center">Rutina</th>
-                                    <th class="col-md-6 text-center" scope="col">Acción</th>
+                                    <th scope="col" class="col-md-3 text-center">Rutina</th>
+                                    <th scope="col" class="col-md-3 text-center">Duración estimada</th>
+                                    <th scope="col" class="col-md-3 text-center">Esfuerzo</th>
+                                    <th class="col-md-3 text-center" scope="col">Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for routine in routines %}
                                 <tr>
                                     <td>{{routine.name}}</td>
+                                    <td class="text-center">
+                                        {% if routine.estimated_duration %}
+                                            {{routine.estimated_duration}}
+                                        {% else %}
+                                            Sin especificar
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-center">
+                                        {% if routine.effort_level %}
+                                            {{routine.effort_level_desc}}
+                                        {% else %}
+                                            Sin especificar
+                                        {% endif %}
+                                    </td>
                                     <td class="text-center">
                                         <a href="{% url 'routine_detail' routine.id %}" class="btn btn-info btn-custom">Ver</a>
                                         {% if user.is_trainer %}
