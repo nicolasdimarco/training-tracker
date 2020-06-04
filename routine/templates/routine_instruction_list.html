@@ -71,6 +71,7 @@
                                     </td>
                                     <td class="text-center">
                                         <a href="{% url 'routine_instruction_edit' routine.id instruction.id %}" class="btn btn-primary">Editar</a>
+                                        <a href="{% url 'routine_instruction_delete' routine.id instruction.id %}" class="btn btn-danger">Borrar</a>
                                     </td>
                                 </tr>
                                 {% endfor %}

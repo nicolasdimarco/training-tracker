@@ -37,8 +37,8 @@
                                 <tr class="col-md-12">
                                     <th scope="col" class="col-md-3 text-center">Rutina</th>
                                     <th scope="col" class="col-md-3 text-center">Duración estimada</th>
-                                    <th scope="col" class="col-md-3 text-center">Esfuerzo</th>
-                                    <th class="col-md-3 text-center" scope="col">Acción</th>
+                                    <th scope="col" class="col-md-2 text-center">Esfuerzo</th>
+                                    <th class="col-md-4 text-center" scope="col">Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -64,6 +64,7 @@
                                         {% if user.is_trainer %}
                                             <a href="{% url 'routine_edit' routine.id %}" class="btn btn-primary btn-custom">Editar</a>
                                             <a href="{% url 'routine_instruction_list' routine.id %}" class="btn btn-secondary btn-custom">Ejercicios</a>
+                                            <a href="{% url 'routine_delete' routine.id %}" class="btn btn-danger btn-custom">Borrar</a>
                                         {% endif %}
                                     </td>
                                 </tr>

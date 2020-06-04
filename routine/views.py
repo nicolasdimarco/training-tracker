@@ -88,6 +88,19 @@ def routine_edit(request, pk):
 
 
 @login_required
+def routine_delete(request, pk):
+    try:
+        routine = Routine.objects.get(pk=pk)
+        routine.delete()
+        return redirect("/routine")
+    except Routine.DoesNotExist:
+        routines = Routine.objects.filter(training_group=request.user.training_group).order_by(
+            F('order').asc(nulls_last=True), 'pk')
+        ctx = {'routines': routines, 'error': 'La rutina que intenta borrar no existe'}
+        return render(request, 'routine_list.html', ctx)
+
+
+@login_required
 def routine_instruction_list(request, pk):
     if not request.user.is_trainer:
         return redirect("/routine")
@@ -121,6 +134,9 @@ def routine_instruction_create(request, pk):
 
 @login_required
 def routine_instruction_edit(request, routine_pk, instruction_pk):
+    if not request.user.is_trainer:
+        return redirect("/routine")
+
     try:
         instruction = RoutineInstruction.objects.get(pk=instruction_pk, routine__id=routine_pk)
         if request.method == 'POST':
@@ -132,3 +148,19 @@ def routine_instruction_edit(request, routine_pk, instruction_pk):
                                                                  'instruction': instruction})
     except RoutineInstruction.DoesNotExist:
         return redirect("/routine")
+
+
+@login_required
+def routine_instruction_delete(request, routine_pk, instruction_pk):
+    if not request.user.is_trainer:
+        return redirect("/routine")
+
+    try:
+        instruction = RoutineInstruction.objects.get(pk=instruction_pk, routine__id=routine_pk)
+        instruction.delete()
+        return redirect("/routine/{}/instruction".format(routine_pk))
+    except RoutineInstruction.DoesNotExist:
+        routines = Routine.objects.filter(training_group=request.user.training_group).order_by(
+            F('order').asc(nulls_last=True), 'pk')
+        return render(request, 'routine_list.html', {'routines': routines,
+                                                     'error': 'La rutina que intenta borrar no existe'})
