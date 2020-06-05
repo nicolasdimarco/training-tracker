@@ -32,45 +32,108 @@
                                 </div>
                             </div>
                         {% endif %}
-                        <table class="table table-head-bg-info mt-4">
-                            <thead>
-                                <tr class="col-md-12">
-                                    <th scope="col" class="col-md-3 text-center">Rutina</th>
-                                    <th scope="col" class="col-md-3 text-center">Duración estimada</th>
-                                    <th scope="col" class="col-md-2 text-center">Esfuerzo</th>
-                                    <th class="col-md-4 text-center" scope="col">Acción</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for routine in routines %}
-                                <tr>
-                                    <td>{{routine.name}}</td>
-                                    <td class="text-center">
-                                        {% if routine.estimated_duration %}
-                                            {{routine.estimated_duration}}
-                                        {% else %}
-                                            Sin especificar
-                                        {% endif %}
-                                    </td>
-                                    <td class="text-center">
-                                        {% if routine.effort_level %}
-                                            {{routine.effort_level_desc}}
-                                        {% else %}
-                                            Sin especificar
-                                        {% endif %}
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="{% url 'routine_detail' routine.id %}" class="btn btn-info btn-custom">Ver</a>
-                                        {% if user.is_trainer %}
-                                            <a href="{% url 'routine_edit' routine.id %}" class="btn btn-primary btn-custom">Editar</a>
-                                            <a href="{% url 'routine_instruction_list' routine.id %}" class="btn btn-secondary btn-custom">Ejercicios</a>
-                                            <a href="{% url 'routine_delete' routine.id %}" class="btn btn-danger btn-custom">Borrar</a>
-                                        {% endif %}
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                        {% for routine in routines %}
+                            <div class="row row-card-no-pd row-card-no-pd-custom">
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="card card-stats card-round">
+                                        <div class="card-body ">
+                                            <div class="row">
+                                                <div class="col-5">
+                                                    <div class="icon-big text-center">
+                                                        <i class="flaticon-list text-secondary"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-7 col-stats">
+                                                    <div class="numbers">
+                                                        <p class="card-category">Rutina</p>
+                                                        <h4 class="card-title">{{routine.name}}</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="card card-stats card-round">
+                                        <div class="card-body ">
+                                            <div class="row">
+                                                <div class="col-5">
+                                                    <div class="icon-big text-center">
+                                                        <i class="flaticon-time text-success"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-7 col-stats">
+                                                    <div class="numbers">
+                                                        <p class="card-category">Duración estimada</p>
+                                                        <h4 class="card-title">
+                                                            {% if routine.estimated_duration %}
+                                                                {{routine.estimated_duration}}
+                                                            {% else %}
+                                                                Sin especificar
+                                                            {% endif %}
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="card card-stats card-round">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-5">
+                                                    <div class="icon-big text-center">
+                                                        <i class="flaticon-graph-2 text-primary"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-7 col-stats">
+                                                    <div class="numbers">
+                                                        <p class="card-category">Esfuerzo</p>
+                                                        <h4 class="card-title">
+                                                            {% if routine.effort_level %}
+                                                                {{routine.effort_level_desc}}
+                                                            {% else %}
+                                                                Sin especificar
+                                                            {% endif %}
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="card card-stats card-round">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                {% if user.is_trainer %}
+                                                    <div class="col-12 col-stats">
+                                                        <div class="text-center">
+                                                            <a href="{% url 'routine_detail' routine.id %}" class="btn btn-info btn-custom">Ver</a>
+                                                            <a href="{% url 'routine_edit' routine.id %}" class="btn btn-primary btn-custom">Editar</a>
+                                                            <a href="{% url 'routine_instruction_list' routine.id %}" class="btn btn-secondary btn-custom">Ejercicios</a>
+                                                            <a href="{% url 'routine_delete' routine.id %}" class="btn btn-danger btn-custom" style="margin-top:5px;">Borrar</a>
+                                                        </div>
+                                                    </div>
+                                                {% else %}
+                                                    <div class="col-5">
+                                                        <div class="icon-big text-center">
+                                                            <i class="flaticon-play-button-1 text-info"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-7 col-stats">
+                                                        <div class="numbers">
+                                                            <a href="{% url 'routine_detail' routine.id %}" class="btn btn-info btn-custom view-routine">Ver</a>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

@@ -26,3 +26,12 @@
     font-size:x-large;
     text-decoration:none !important;
 }
+
+.row-card-no-pd-custom {
+    margin-top: 30px !important;
+    margin-bottom: 15px !important;
+}
+
+.view-routine {
+    font-size: 20px !important;
+}
