@@ -68,26 +68,80 @@
                                 <a href="{% url 'training_create' %}" class="btn btn-success float-right"><i class="fas fa-swimmer"></i>  Entrenar</a>
                             </div>
                         </div>
-                        <table class="table table-head-bg-info mt-4">
-                            <thead>
-                                <tr class="col-md-12">
-                                    <th scope="col" class="col-md-3">Rutina</th>
-                                    <th scope="col" class="col-md-3">Fecha</th>
-                                    <th scope="col" class="col-md-3">Duración</th>
-                                    <th scope="col" class="col-md-3 text-center">Acción</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for training  in trainings %}
-                                    <tr>
-                                        <td>{{training.routine.name}}</td>
-                                        <td>{{training.date}}</td>
-                                        <td>{{training.duration}}</td>
-                                        <td class="text-center"><a href="{% url 'training_delete' training.id %}" class="btn btn-danger">Borrar</a></td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                        {% for training  in trainings %}
+                            <div class="row row-card-no-pd row-card-no-pd-custom">
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="card card-stats card-round">
+                                        <div class="card-body ">
+                                            <div class="row">
+                                                <div class="col-5">
+                                                    <div class="icon-big text-center">
+                                                        <i class="flaticon-list text-secondary"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-7 col-stats">
+                                                    <div class="numbers">
+                                                        <p class="card-category">Rutina</p>
+                                                        <h4 class="card-title">{{training.routine.name}}</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="card card-stats card-round">
+                                        <div class="card-body ">
+                                            <div class="row">
+                                                <div class="col-5">
+                                                    <div class="icon-big text-center">
+                                                        <i class="flaticon-calendar text-success"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-7 col-stats">
+                                                    <div class="numbers">
+                                                        <p class="card-category">Fecha</p>
+                                                        <h4 class="card-title">{{training.date|date:"d/m/y"}}</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="card card-stats card-round">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-5">
+                                                    <div class="icon-big text-center">
+                                                        <i class="flaticon-time text-primary"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-7 col-stats">
+                                                    <div class="numbers">
+                                                        <p class="card-category">Duracion</p>
+                                                        <h4 class="card-title">{{training.duration}}</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="card card-stats card-round">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-12 text-center">
+                                                    <div class="numbers">
+                                                        <a href="{% url 'training_delete' training.id %}" class="btn btn-danger">Borrar</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
