@@ -80,7 +80,7 @@
                         <div class="card-header">
                             <h4 class="card-title"><strong>#{{ forloop.counter }}</strong> {{instruction.title}}</h4>
                         </div>
-                        <div class="card-body" style="min-height:340px;">
+                        <div class="card-body">
                             <div class="row">
                                 <div class="col-5 col-md-2 text-center">
                                     <div class="nav flex-column nav-pills nav-secondary nav-pills-no-bd nav-pills-icons" id="v-pills-tab-with-icon-{{instruction.id}}" role="tablist" aria-orientation="vertical">
@@ -102,7 +102,10 @@
                                     <div class="tab-content" id="v-pills-with-icon-tabContent-{{instruction.id}}">
                                         {% if instruction.video_link %}
                                             <div class="tab-pane fade active show" id="v-pills-video-icons-{{instruction.id}}" role="tabpanel" aria-labelledby="v-pills-video-tab-icons-{{instruction.id}}">
-                                                <iframe width="560" height="315" src="https://www.youtube.com/embed/{{instruction.get_yt_video_id}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                <div class="video-responsive">
+                                                    <iframe src="https://www.youtube.com/embed/{{instruction.get_yt_video_id}}" frameborder="0" allowfullscreen></iframe>
+                                                </div>
+
                                             </div>
                                         {% endif %}
                                         {% if instruction.description %}
